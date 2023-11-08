@@ -1,0 +1,609 @@
+/* (* - represents everything; we can use it to reset): */ 
+* {
+    /* when we add margin and padding it doesn't affect the actual witdh and height of the element (it is contained inside of it): */
+    box-sizing: border-box;
+    /* we reset the margin and padding to 0 (some elements have default margin/padding), so we start from scrath for all: 
+       we forward add them as we need them */
+    margin: 0;
+    padding: 0;
+}
+
+/* we define variables (custom properties) in a SCOPE; if we define them in a ROOT scope we can use them everywhere */
+:root {
+    --primary-color: #4891ff;
+    --light-color: #f4f4f6;
+    --dark-color: #111;
+
+/* html {
+
+} */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background: #fff;
+    /* we get rid of the horizontal scroll: */
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    /* So tha the image stays 100% inside the div (that has a certain witdh) and doesn't brake out of it: */
+    max-width: 100%;
+}
+
+
+/* Navbar: */
+.navbar {
+    background: #fff;
+    padding: 20px;
+}
+
+.navbar .container {
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-between;
+    /* we align the flex-items on the vertical center: */
+    align-items: center;
+}
+
+.navbar .main-menu ul {
+    display: flex;
+    /* flex-direction: row; */
+}
+
+.navbar ul li a {
+    padding: 10px 20px;
+    /* links are displayed inline by default, we want them block: */
+    display: block;
+    font-weight: 600;
+    /* when we hover over the links we want to gradually change color (not immediately) (see below): */
+    transition: 0.5s;
+}
+
+.navbar ul li a:hover {
+    /* we use variable declared above in :root : */
+    color: var(--primary-color);
+}
+
+/* we put some more space between the icon and the text for li, that has an icon in it along the anchor; 
+   so we add margin to the icon (something like that): */
+.navbar ul li a i {
+    margin-right: 10px;
+}
+
+/* we target the last li - the anchor/ button in the last li: */
+.navbar ul li:last-child a {
+    margin-left: 10px;
+}
+
+
+/* Hero */
+.hero {
+    margin-bottom: 50px;
+}
+
+.hero .container {
+    /* we set a background image: */
+    background: url('../images/hero-bg.png') no-repeat;
+    background-size: contain;
+    /* we want to push the image to the bottom: */
+    background-position: center bottom;
+    /* we set the height so we can see the whole image: */
+    height: 550px;
+}
+
+/* this content will be 70% of the container in width: */
+.hero .hero-content {
+    width: 70%;
+}
+
+/* this content will be 70% of the hero-content in width: */
+/* so 70% of 70% of the container: */
+.hero .hero-text {
+    width: 70%;
+    /* we add margin-bottom to push the buttons down: */
+    margin-bottom: 20px;
+}
+
+
+/* Video */
+.video {
+    padding: 10px 0 40px;
+}   
+
+.video .video-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video .video-preview {
+    margin-bottom: 20px;
+}
+
+/* Testimonials */
+
+.testimonials {
+    /* we add padding to top and bottom 
+    so that will cover the top and bottom margins added by the h3: */
+    padding: 40px 0;
+}
+
+.testimonials .testimonials-heading {
+    /* we don't want the header to ocupy full width: */
+    width: 700px;
+    margin-bottom: 40px;
+}
+
+.testimonials .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* we add some spaces between our cards: */
+    gap: 30px;
+}
+
+/* we target and modify the second child from the card div - the name */
+.testimonials .card p:nth-child(2) {
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+/* Pricing */
+.pricing .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.pricing .pricing-card-subheading {
+    margin-bottom: 30px;
+
+}
+
+.pricing .pricing-card-price {
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.pricing .pricing-card-body ul {
+    margin: 30px 0;
+}
+
+.pricing .pricing-card-body ul li {
+    margin-bottom: 20px;
+}
+
+.pricing .pricing-card-body ul li i {
+    margin-right: 10px;
+}
+
+.pricing .pricing-footer {
+    margin-top: 30px 0;
+}
+
+/* FAQ */
+.faq {
+    padding: 40px 0;
+}
+
+.faq .faq-group {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.faq .faq-group .faq-group-header {
+    padding: 20px 0;
+    margin-bottom: 15px;
+    /* because we need to position "+"/"-" symbol with absolute within the group header (we wan to say exactly where we an it - we will further specify the exact position (at the top right...)...) */
+    /* in order to do the above we have to position relative the faq-group-header... : */
+    position: relative;
+}
+
+.faq .faq-group .faq-group-header h4 {
+    font-weight: 600;
+    /* we don't want to run into the icon: */
+    width: 95%;
+}
+
+.faq .faq-group .faq-group-header i {
+    position: absolute;
+    right: 0;
+    /* we bring it down from the top: */
+    top: 35px;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.faq .faq-group .faq-group-body {
+    /* we want the body not be showned by default --- */
+    display: none;
+}
+
+/* if it has the class of open it will show (so block, not none): */
+.faq .faq-group .faq-group-body.open {
+    display: block;
+}
+
+.faq ul.faq-menu {
+    max-width: 400px;
+    /* we want it in the middle: */
+    margin: auto;
+    display: flex;
+    /* we arange the li elements with equal space between them in their ul "container" */
+    justify-content: space-between;
+    /* center the li elements in their space: */
+    align-items: center;
+    background: #ddd;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.faq ul.faq-menu li {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* the li with active class will have a different background and text colors: */
+.faq ul.faq-menu li.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+
+/* Footer */
+.footer {
+    padding: 40px 0;
+}
+
+.footer .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer .footer-grid .card {
+    margin: 20px 30px 30px 0;
+}
+
+.footer input[type='email'] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.footer .footer-grid i {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.footer .footer-grid h4 {
+    margin-bottom: 10px;
+}
+
+.footer .footer-grid a {
+    color: #ccc;
+}
+
+.footer .footer-grid ul li {
+    line-height: 2.5;
+}
+
+
+
+
+
+
+
+
+/* Utility Classes: */
+
+/* if we stretch the window the content will be somehow in the middle and not near the edge of the screen: */
+.container {
+    /* default width that is ok in our case: */
+    max-width: 1100px;
+    /* we want our content to be in the middle - we use margin now (so left and right with auto): */
+    margin: 0 auto;
+    /* we also want to add some padding: */
+    padding: 0 15px;
+}
+
+/* we do something similar for container small: */
+.container-sm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Card utility class*/
+/* we will use CSS Grid to display these cards... */
+.card {
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Buttons: */
+.btn {
+    /* links are inline by default... we want to have inline-block: */
+    display: inline-block;
+    padding: 13px 20px;
+    background: var(--light-color);
+    color: #333;
+    font-weight: 600px;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    /* we add a transition for hover any effects: */
+    transition: 0.5s;
+}
+
+.btn:hover {
+    /* we change the background opacity from 1 to 0.8 if we hover and the buton is not in the navbar; 
+       ... so we just lighten up the background color a little: */
+    /* we do this for all the colors of the buttons: */
+    opacity: 0.8;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.btn-dark {
+    background: var(--dark-color);
+    color: #fff;
+}
+
+/* we use the class below if we want a block level button - with width that goes all the way across (100%): */
+.btn-block {
+    /* so we change from inline-block (that we set above) to block: */
+    display: block;
+    /* and we also need to modify the width: */
+    width: 100%;
+}
+
+/* Text Classes */
+.text-xxl {
+    /* rem - relative to the root font size (16px for now): */
+    /* 3rem = 3 * 16px = 48px : */
+    font-size: 3rem;
+    /* 1.2 = 1.2 * 48px (I think) = ... : */
+    line-height: 1.2;
+    font-weight: 600;
+    margin: 40px 0 20px;
+}
+
+.text-xl {
+    /* rem - relative to the root font size (16px for now): */
+    /* 2.2rem = 2.2 * 16px = ... : */
+    font-size: 2.2rem;
+    /* 1.4 = 1.4 * 2.2 * 16px (I think) = ... : */
+    line-height: 1.4;
+    font-weight: normal;
+    /* 40px at the top, 20px at the bottom: */
+    margin: 40px 0 20px;
+}
+
+.text-lg {
+    /* rem - relative to the root font size (16px for now): */
+    /* 1.8rem = 1.8 * 16px = ... : */
+    font-size: 1.8rem;
+    /* 1.4 = 1.4 * 1.8 * 16px (I think) = ... : */
+    line-height: 1.4;
+    font-weight: normal;
+    margin: 30px 0 20px;
+}
+
+.text-md {
+    /* rem - relative to the root font size (16px for now): */
+    /* 1.2rem = 1.2 * 16px = ... : */
+    font-size: 1.2rem;
+    /* 1.4 = 1.4 * 1.2 * 16px (I think) = ... : */
+    line-height: 1.4;
+    font-weight: normal;
+    margin: 20px 0 10px;
+}
+
+.text-sm {
+    /* rem - relative to the root font size (16px for now): */
+    /* 0.9rem = 0.9 * 16px = ... : */
+    font-size: 0.9rem;
+    /* 1.4 = 1.4 * 0.9 * 16px (I think) = ... : */
+    line-height: 1.4;
+    font-weight: normal;
+    margin: 10px 0 5px;
+}
+
+/* utility class to align text: */
+.text-center {
+    text-align: center;
+}
+
+
+/* Background utility classes */
+.bg-primary {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.bg-light {
+    background: var(--light-color);
+    color: #333;
+}
+
+.bg-dark {
+    background: var(--dark-color);
+    color: #fff;
+}
+
+.bg-black {
+    background: #000;
+    color: #fff;
+}
+
+
+
+/* Hamburger Button */
+.hamburger-button {
+    /* for normal screens we don't want it displayed */
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    /* high z-index helps us to bring the button to the front: */
+    z-index: 1000;
+}
+
+/* we build the actual hamburger button lines using CSS: */
+.hamburger-button .hamburger-line {
+    width: 30px;
+    height: 3px;
+    background: #333;
+    margin: 6px 0;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    /* the Mobile Menu will be hidden for normal witdh: */
+    /* when we toggle the Hamburger Button it will go to right: 0px (active class is on)/ -300px (active class is not on) => with JS */
+    right: -300px;
+    width: 250px;
+    height: 100%;
+    z-index: 100;
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    transition: right 0.3s ease-in-out;
+}
+
+.mobile-menu.active {
+    /* when we toggle the Hamburger Button it will go to right: 0px (active class is on)/ -300px (active class is not on) => with JS */
+    right: 0;
+}
+
+.mobile-menu ul {
+    margin-top: 100px;
+    padding-right: 10px;
+}
+
+.mobile-menu ul li {
+    margin: 10px 0;
+}
+
+.mobile-menu ul li a {
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+
+/* Media Queries */
+/* @media (min-width: 960px) {
+} */
+@media (max-width: 960px) {
+    /* body {
+        display: none;
+    } */
+    .text-xxl {
+        font-size: 2.5rem;
+    }
+}
+
+/* for larger mobile devices: */
+@media (max-width: 670px) {
+    /* we want the main-menu to disappear when we get to this: */
+    .navbar .main-menu {
+        display: none;
+    }
+
+    .navbar .hamburger-button {
+        display: block;
+    }
+
+    .hero .container {
+        background: url('../images//hero-bg-mobile.png') no-repeat;
+        /* the below values were found proper after some experimentation: */
+        background-size: 350px 400px;
+        background-position: bottom;
+        height: 770px;
+    }
+
+    .hero .hero-content,
+    .hero .hero-text {
+        width: 100%;
+        text-align: center;
+    }
+  
+    .hero .hero-buttons .btn {
+        /* we stacked the two buttons one on top of the other: */
+        margin-bottom: 10px;
+        display: block;
+        width: 100%;
+    }
+  
+    .testimonials .testimonials-heading {
+        max-width: 100%;
+        text-align: center;
+    }
+  
+    .testimonials .testimonials-grid,
+    .pricing .pricing-grid,
+    .footer .footer-grid {
+        /* we want to stack the testimonials, pricing grid things, footer grid things in one column: */
+        grid-template-columns: 1fr;
+    }
+  
+    .footer .card {
+        margin-right: 0;
+    }
+  
+    .footer .footer-grid > div {
+        text-align: center;
+    }
+
+    /* Text */
+    .text-xl {
+        font-size: 1.rem;
+    }
+
+    text-lg {
+        font-size: 1.5rem;
+    }
+
+    text-md {
+        font-size: 1.1rem;
+    }
+}
+
+/* for smaller mobile devices: */
+@media (max-width: 500px) {
+    .text-xxl {
+        font-size: 2rem;
+    }
+}
+
+
+
